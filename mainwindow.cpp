@@ -74,15 +74,7 @@ MainWindow::MainWindow()
 
 
   rootLayout->addWidget(top);
-  // rootLayout->addWidget(middle);
   setCentralWidget(root);
-
-  // Transparency
-  setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-  setParent(0); // Create TopLevel-Widget
-  setAttribute(Qt::WA_NoSystemBackground, true);
-  setAttribute(Qt::WA_TranslucentBackground, true);
-  // setAttribute(Qt::WA_PaintOnScreen);
 }
 
 void MainWindow::onQuit() {
