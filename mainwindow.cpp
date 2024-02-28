@@ -40,6 +40,18 @@ MainWindow::MainWindow()
 {
   mwReference = this;
 
+  auto menu = this->createMenu();
+  trayIcon = new QSystemTrayIcon(this);
+  this->trayIcon->setContextMenu(menu);
+
+  auto appIcon = QIcon(":/icons/heart.png");
+  this->trayIcon->setIcon(appIcon);
+  this->setWindowIcon(appIcon);
+
+  this->trayIcon->show();
+
+  connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::iconActivated);
+
   // Install the low-level keyboard & mouse hooks
   hhkLowLevelKybd = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, 0, 0);
 
@@ -173,4 +185,28 @@ void MainWindow::keyDown(DWORD key)
 }
 
 void MainWindow::keyUp(DWORD key){
+}
+
+
+QMenu* MainWindow::createMenu() {
+
+  auto quitAction = new QAction("&Quit", this);
+  connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+
+  auto menu = new QMenu(this);
+  menu->addAction(quitAction);
+  return menu;
+
+}
+
+
+
+void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason_) {
+  switch (reason_) {
+  case QSystemTrayIcon::Trigger:
+    // this->trayIcon->showMessage("Hello," "You clicked me!");
+    break;
+  default:
+    break;
+  }
 }

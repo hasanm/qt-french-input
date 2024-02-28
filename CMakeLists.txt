@@ -14,6 +14,7 @@ set(CMAKE_AUTOUIC ON)
 
 add_executable( ${CMAKE_PROJECT_NAME}
                 WIN32
+                my.qrc
                 main.cpp
                 mainwindow.cpp)
 

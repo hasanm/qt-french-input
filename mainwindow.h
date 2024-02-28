@@ -12,6 +12,8 @@ class QComboBox;
 class QVBoxLayout;
 class QIcon;
 class QLibrary;
+class QMenu;
+class QSystemTrayIcon;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -26,6 +28,9 @@ class MainWindow : public QMainWindow
   void keyDown(DWORD key);
   void keyUp(DWORD key);
 
+public slots:
+  void iconActivated(QSystemTrayIcon::ActivationReason);
+
 
 private:
   int totalItems = 3;
@@ -34,9 +39,13 @@ private:
 
   HHOOK hhkLowLevelKybd;
 
+  QSystemTrayIcon* trayIcon;
+  QMenu* trayIconMenu;
+
   void inputOE();
   void SendInputString(const std::wstring &str);
 
+  QMenu* createMenu();
 };
 
 #endif // MAINWINDOW_H
