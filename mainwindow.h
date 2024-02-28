@@ -3,7 +3,7 @@
 
 #include <qt_windows.h>
 #include <QtWidgets>
-#include <string> 
+#include <string>
 
 
 QT_BEGIN_NAMESPACE
@@ -11,7 +11,7 @@ class QLabel;
 class QComboBox;
 class QVBoxLayout;
 class QIcon;
-class QLibrary; 
+class QLibrary;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -30,7 +30,6 @@ class MainWindow : public QMainWindow
 private:
   int totalItems = 3;
   QPushButton *quitButton;
-  QPushButton *muteButton;
   QVBoxLayout *contentLayout;
 
   HHOOK hhkLowLevelKybd;

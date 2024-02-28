@@ -8,6 +8,8 @@
 #include "Windows.h"
 #include <vector>
 #include <string>
+#include <iostream>
+#include <fstream>
 
 // Crosslink between Qt class and win callback
 MainWindow *mwReference;
@@ -44,18 +46,12 @@ MainWindow::MainWindow()
   QWidget *root = new QWidget(this);
   QWidget *top = new QWidget(this);
 
-
-
   /* Top Layout */
   QHBoxLayout *topLayout = new QHBoxLayout(top);
+
   quitButton = new QPushButton(QString ("Quit"), this);
   connect(quitButton, &QPushButton::clicked, this, &MainWindow::onQuit);
   topLayout->addWidget(quitButton);
-
-  muteButton = new QPushButton(QString("Toggle Mute"), this);
-  muteButton->setStyleSheet("background-color:green");
-  connect(muteButton, &QPushButton::clicked, this, &MainWindow::inputOE);
-  topLayout->addWidget(muteButton);
 
   top->setLayout(topLayout);
 
@@ -128,6 +124,7 @@ void MainWindow::SendInputString(const std::wstring &str)
     }
 
     SendInput(in.size(), &in[0], sizeof(INPUT));
+
 }
 
 void MainWindow::inputOE() {
@@ -139,10 +136,9 @@ void MainWindow::inputOE() {
 
   // Press the key
   // byte x = VkKeyScan(test.at(0).unicode());
-  byte x = 0x0153;
   ip.ki.wVk = 0; // virtual-key code for the "a" key
   ip.ki.dwFlags = KEYEVENTF_UNICODE; // 0 for key press
-  ip.ki.wScan = x; 
+  ip.ki.wScan = 0x0153;
   SendInput(1, &ip, sizeof(INPUT));
 
   // Release the key
@@ -173,10 +169,6 @@ void MainWindow::keyDown(DWORD key)
     inputOE();
     // std::wstring st = L"œ";
     // SendInputString(st);
-  } else if (key == VK_F23 ) {
-    qDebug() << "F23 Pressed";
-  } else if (key == VK_F22 ) {
-      qDebug() << "F22 Pressed";
   }
 }
 
