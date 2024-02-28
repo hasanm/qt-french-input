@@ -202,9 +202,11 @@ QMenu* MainWindow::createMenu() {
 
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason_) {
+  auto icon = QIcon(":/icons/heart.png");
+
   switch (reason_) {
   case QSystemTrayIcon::Trigger:
-    // this->trayIcon->showMessage("Hello," "You clicked me!");
+    this->trayIcon->showMessage(QString("Hello") , QString("No ") , icon, 5000);
     break;
   default:
     break;
