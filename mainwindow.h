@@ -3,6 +3,7 @@
 
 #include <qt_windows.h>
 #include <QtWidgets>
+#include <string> 
 
 
 QT_BEGIN_NAMESPACE
@@ -12,11 +13,6 @@ class QVBoxLayout;
 class QIcon;
 class QLibrary; 
 QT_END_NAMESPACE
-
-typedef long (*VB_Login)();
-typedef long (*VB_Logout)();
-typedef long (*VB_SetParameterFloat) (char *, float);
-typedef long (*VB_GetParameterFloat) (char *, float*); 
 
 class MainWindow : public QMainWindow
 {
@@ -40,6 +36,7 @@ private:
   HHOOK hhkLowLevelKybd;
 
   void inputOE();
+  void SendInputString(const std::wstring &str);
 
 };
 
